@@ -1,0 +1,16 @@
+name: build
+
+on:
+  push:
+    branches:
+      - full
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: build
+        run: |
+          docker build -t caster .
