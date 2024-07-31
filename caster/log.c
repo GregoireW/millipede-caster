@@ -7,7 +7,13 @@
 #include "log.h"
 
 int log_init(struct log *this, const char *filename, log_cb_t log_cb, void *arg) {
-	this->logfile = fopen(filename, "a+");
+    if (strcmp(filename, "stdout")==0){
+        this->logfile = stdout;
+    } else if (strcmp(filename, "stderr")==0){
+        this->logfile = stderr;
+    } else {
+        this->logfile = fopen(filename, "a+");
+    }
 	if (!this->logfile) {
 		fprintf(stderr, "Can't open log file %s: %s\n", filename, strerror(errno));
 		return -1;
