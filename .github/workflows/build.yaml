@@ -1,0 +1,31 @@
+name: simple_build
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install cmake libcyaml-dev libjson-c-dev -y
+
+      - name: Create makefile
+        run: |
+          cmake -S . -B $(pwd)/cmake-build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: |
+          cmake --build $(pwd)/cmake-build --config Release
+
