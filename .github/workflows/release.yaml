@@ -24,6 +24,8 @@ jobs:
           cmake --build $(pwd)/cmake-build --config Release
 
       - name: Upload release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           mv $(pwd)/cmake-build/caster $(pwd)/cmake-build/caster-linux-x64
           gh release upload ${{github.event.release.tag_name}} $(pwd)/cmake-build/caster-linux-x64        
