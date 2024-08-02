@@ -1,15 +1,8 @@
 name: simple build and test
 
 on:
-  push:
-    branches:
-      - master
-      - main
-      - chore/ci_action
-  pull_request:
-    branches:
-      - master
-      - main
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -29,4 +22,8 @@ jobs:
       - name: Build
         run: |
           cmake --build $(pwd)/cmake-build --config Release
+
+      - name: Upload release asset
+        run: |
+          gh release upload ${{github.event.release.tag_name}} $(pwd)/cmake-build/caster --name caster-linux-x64        
 
