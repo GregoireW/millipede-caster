@@ -3,6 +3,8 @@
 caster/caster
 caster/tests
 
+target/
+
 cmake-build-*/
 CMakeLists.txt.user
 CMakeCache.txt
