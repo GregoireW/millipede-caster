@@ -32,17 +32,19 @@ jobs:
           cmake --build $(pwd)/cmake-build --config Release
           cmake --build $(pwd)/cmake-build
 
-      - name: setup java 21
-        uses: actions/setup-java@v4
+      - name: setup python 3.12
+        uses: actions/setup-python@v5
         with:
-          distribution: 'temurin'
-          java-version: '21'
+          python-version: 3.12
 
       - name: Run tests
         run: |
-          cd millipede-test
-          export CASTER_EXECUTABLE=../cmake-build/caster
-          mvn -B --no-transfer-progress test
+          cd caster-test
+          ../cmake-build/caster -c caster_config/caster.yaml &
+          CASTER_PID=$!
+          pip install -r requirements.txt 
+          behave
+          kill -SIGINT $CASTER_PID
 
       #- name: Run tests
       #  run: |

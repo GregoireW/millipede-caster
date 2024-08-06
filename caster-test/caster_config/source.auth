@@ -1,0 +1,7 @@
+#
+# Source authentication
+#
+# Format:
+#	MOUNTPOINT:username:password
+NORTH:NORTHusr:NORTHpwd
+TEST0:none:letmein

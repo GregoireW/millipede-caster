@@ -1,0 +1,71 @@
+#
+# Main configuration file for the Millipede RTK caster
+#
+
+#
+# IP/ports to listen to.
+# IPv6 and IPv4 supported.
+# ::0 (IPv6) or 0.0.0.0 (IPv4) to bind to all addresses.
+#
+# Default port: 2101
+#
+listen:
+  - port:		2101
+    ip:			127.0.0.1
+  - port:		2101
+    ip:			::1
+
+#
+# Optional caster from which we can get and announce sources.
+#
+#proxy:
+#  - table_refresh_delay:	600
+#    host:			maincaster.fr
+#    port:			2101
+
+#
+# Credentials to connect to remote hosts, especially for the proxy mode.
+#
+host_auth_file:		./caster_config/host.auth
+
+#
+# Source credentials for local sources and their STR lines
+#
+source_auth_file:	./caster_config/source.auth
+sourcetable_file:	./caster_config/sourcetable.dat
+
+
+#
+# Log files
+#
+access_log:		./log/access.log
+log:			./log/caster.log
+
+#
+# Log levels, syslog-like:
+#	EMERG
+#	ALERT
+#	CRIT
+#	ERR
+#	WARNING
+#	NOTICE
+#	INFO
+#	DEBUG	=> WARNING: leaks passwords to the logs
+# Extension over syslog levels:
+#	EDEBUG	=> WARNING: leaks passwords to the logs
+#
+log_level:		INFO
+
+#
+# Distance hysteresis (in meters) to avoid spurious base change on the virtual base.
+#
+hysteresis_m:		500.0
+
+# default size set for sending buffers (SO_SNDBUF), 112 KB
+# currently for all client sockets.
+backlog_socket: 114688
+# max backlog in the caster over which we drop a client connection
+backlog_evbuffer: 16384
+
+# admin user for the /adm section
+admin_user:	admin
