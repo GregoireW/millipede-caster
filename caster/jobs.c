@@ -207,7 +207,7 @@ void joblist_append(struct joblist *this, void (*cb)(struct bufferevent *bev, vo
 
 void *jobs_start_routine(void *arg) {
 	struct caster_state *caster = (struct caster_state *)arg;
-	printf("started thread %p\n", pthread_self());
+	printf("started thread %lu\n", pthread_self());
 	joblist_run(caster->joblist);
 	return NULL;
 }
